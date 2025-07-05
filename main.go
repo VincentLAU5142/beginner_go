@@ -106,7 +106,7 @@ func main() {
 
 	// Arrays and Slices
 	numbers := [5]int{10, 20, 30, 40, 50}
-	numbers[0] = 60
+	// numbers[0] = 60
 	fmt.Printf("This is our array %v\n", numbers)
 
 	fmt.Println("This is the last value", numbers[len(numbers)-1])
@@ -118,6 +118,43 @@ func main() {
 		{4, 5, 6},
 	}
 	fmt.Printf("this is our matrix: %v\n", matrix)
+
+	//slice
+	//allNumbers := numbers[:]
+	//firstThree := numbers[0:3]
+
+	fruits := []string{"apple", "banana", "strawberry"}
+	fmt.Printf("these are my fruits %v\n", fruits)
+
+	fruits = append(fruits, "kiwi")
+	fmt.Printf("these are my fruits with kiwi %v\n", fruits)
+
+	fruits = append(fruits, "mango", "pineapple")
+	fmt.Printf("these are my fruits with more fruits %v\n", fruits)
+
+	moreFruits := []string{"blueberries", "tomato"}
+	fruits = append(fruits, moreFruits...)
+	fmt.Printf("these are my fruits with more fruits %v\n", fruits)
+
+	//range of array, the _ are the index
+
+	for index, value := range numbers {
+		fmt.Printf("index %d and value %d\n", index, value)
+	}
+	capitalCities := map[string]string{
+		"USA":   "Washington D.C.",
+		"India": "New Delhi",
+		"UK":    "London",
+	}
+	capital, exists := capitalCities["Germany"]
+	if exists {
+		fmt.Println("this is the capital", capital)
+	} else {
+		fmt.Println("Does not exist")
+	}
+
+	delete(capitalCities, "UK")
+	fmt.Printf("this is the new deleted map:  %v\n", capitalCities)
 }
 
 func add(a int, b int) int {
