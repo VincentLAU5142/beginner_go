@@ -4,6 +4,11 @@ import (
 	"fmt"
 )
 
+type Person struct {
+	Name string
+	Age  int
+}
+
 func main() {
 	//Variables
 
@@ -155,6 +160,49 @@ func main() {
 
 	delete(capitalCities, "UK")
 	fmt.Printf("this is the new deleted map:  %v\n", capitalCities)
+
+	//struct
+	person := Person{Name: "John", Age: 25}
+	fmt.Printf("This is out person %+v\n", person)
+
+	employee := struct {
+		name string
+		id   int
+	}{
+		name: "alice",
+		id:   123,
+	}
+
+	type Address struct {
+		Street string
+		City   string
+	}
+	type Contact struct {
+		Name    string
+		Address Address
+		Phone   string
+	}
+	contact := Contact{
+		Name: "Marc",
+		Address: Address{
+			Street: "123 Main Street",
+			City:   "Anytown",
+		},
+	}
+	fmt.Println("this is contact", contact)
+	fmt.Println("this is employee", employee)
+
+	fmt.Println("name before: ", person.Name)
+	// modifyPersonName(&person)
+	person.modifyPersonName("Melkey") //individual input separate from the func
+	fmt.Println("name after: ", person.Name)
+
+	//quick demo in pointers to explain the modifyPersonName func
+	x := 20
+	ptr := &x
+	fmt.Printf("value of x:= %d and address of x %p\n", x, ptr)
+	*ptr = 30
+	fmt.Printf("value of new x:= %d and address of x %p\n", x, ptr)
 }
 
 func add(a int, b int) int {
@@ -163,4 +211,10 @@ func add(a int, b int) int {
 
 func calculateSumAndProduct(a, b int) (int, int) {
 	return a + b, a * b
+}
+
+func (p *Person) modifyPersonName(name string) {
+	p.Name = name
+	//only in this scope are "melkey" ,if not use the * as the pointer and &
+	fmt.Println("inside scope: new name", p.Name)
 }
